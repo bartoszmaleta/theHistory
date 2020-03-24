@@ -13,7 +13,6 @@ public class TheHistoryArrayList implements TheHistory {
 
     @Override
     public void add(String text) {
-        //TODO: check the TheHistory interface for more information
         String[] words = text.split("\\s+");
         for (String word : words) {
             wordsArrayList.add(word);
@@ -22,12 +21,15 @@ public class TheHistoryArrayList implements TheHistory {
 
     @Override
     public void removeWord(String wordToBeRemoved) {
-        //TODO: check the TheHistory interface for more information
+        for (String word : wordsArrayList) {
+            if (wordToBeRemoved.equals(word)) {
+                wordsArrayList.remove(word);
+            }
+        }
     }
 
     @Override
     public int size() {
-        //TODO: check the TheHistory interface for more information
         return wordsArrayList.size();
     }
 

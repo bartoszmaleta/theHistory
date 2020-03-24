@@ -14,6 +14,10 @@ public class TheHistoryArrayList implements TheHistory {
     @Override
     public void add(String text) {
         //TODO: check the TheHistory interface for more information
+        String[] words = text.split("\\s+");
+        for (String word : words) {
+            wordsArrayList.add(word);
+        }
     }
 
     @Override
@@ -24,7 +28,7 @@ public class TheHistoryArrayList implements TheHistory {
     @Override
     public int size() {
         //TODO: check the TheHistory interface for more information
-        return 0;
+        return wordsArrayList.size();
     }
 
     @Override

@@ -11,7 +11,6 @@ public class TheHistoryArray implements TheHistory {
 
     @Override
     public void add(String text) {
-        //TODO: check the TheHistory interface for more information
 //        String[] words = text.split("\\s+");
         String[] words = text.split("\\s+");
         int newLength = words.length + wordsArray.length;
@@ -20,13 +19,10 @@ public class TheHistoryArray implements TheHistory {
         System.arraycopy(words, 0, result, wordsArray.length, words.length);
 
         wordsArray = result;
-
-
     }
 
     @Override
     public void removeWord(String wordToBeRemoved) {
-        //TODO: check the TheHistory interface for more information
         StringBuilder str = new StringBuilder();
         for (String word : wordsArray) {
             if (!wordToBeRemoved.equals(word + ",")) {
@@ -36,13 +32,10 @@ public class TheHistoryArray implements TheHistory {
 
         String[] result = str.toString().split(",");
         wordsArray = result;
-
-
     }
 
     @Override
     public int size() {
-        //TODO: check the TheHistory interface for more information
         return wordsArray.length;
     }
 

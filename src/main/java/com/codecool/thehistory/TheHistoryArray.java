@@ -23,6 +23,7 @@ public class TheHistoryArray implements TheHistory {
 
     @Override
     public void removeWord(String wordToBeRemoved) {
+        // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         StringBuilder str = new StringBuilder();
         for (String word : wordsArray) {
             if (!wordToBeRemoved.equals(word + ",")) {
@@ -41,7 +42,7 @@ public class TheHistoryArray implements TheHistory {
 
     @Override
     public void clear() {
-        //TODO: check the TheHistory interface for more information
+        wordsArray = new String[0];
     }
 
     @Override

@@ -1,9 +1,6 @@
 package com.codecool.thehistory;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class TheHistoryLinkedList implements TheHistory {
     /**
@@ -13,7 +10,6 @@ public class TheHistoryLinkedList implements TheHistory {
 
     @Override
     public void add(String text) {
-        //TODO: check the TheHistory interface for more information
         String[] words = text.split("\\s+");
         for (String word : words) {
             wordsLinkedList.add(word);
@@ -22,28 +18,67 @@ public class TheHistoryLinkedList implements TheHistory {
 
     @Override
     public void removeWord(String wordToBeRemoved) {
-        //TODO: check the TheHistory interface for more information
+        Iterator itr = wordsLinkedList.iterator();
+
+        //        int index = 0;
+//        while (itr.hasNext()) {
+//            if (wordsLinkedList.get(index).equals(wordToBeRemoved)) {
+//                wordsLinkedList.remove(index);
+//            }
+//            index++;
+//        }
+
+        while (itr.hasNext()) {
+            if (itr.next().equals(wordToBeRemoved)) {
+                itr.remove();
+            }
+        }
     }
 
     @Override
     public int size() {
-        //TODO: check the TheHistory interface for more information
         return wordsLinkedList.size();
     }
 
     @Override
     public void clear() {
-        //TODO: check the TheHistory interface for more information
+        wordsLinkedList.clear();
     }
 
     @Override
     public void replaceOneWord(String from, String to) {
         //TODO: check the TheHistory interface for more information
+        Collections.replaceAll(wordsLinkedList, from, to);
     }
 
     @Override
     public void replaceMoreWords(String[] fromWords, String[] toWords) {
         //TODO: check the TheHistory interface for more information
+
+
+        StringBuilder fromWordsStringBuilder = new StringBuilder();
+        for (int i = 0; i < fromWords.length; i++) {
+            fromWordsStringBuilder.append(fromWords[i] + " ");
+        }
+        String fromWordsString = fromWordsStringBuilder.toString();
+
+        StringBuilder toWordsStringBuilder = new StringBuilder();
+        for (int i = 0; i < toWords.length; i++) {
+            toWordsStringBuilder.append(toWords[i]+ " ");
+        }
+        String toWordsString = toWordsStringBuilder.toString();
+
+        StringBuilder wordsArrayListStringBuilder = new StringBuilder();
+        for (int i = 0; i < wordsLinkedList.size(); i++) {
+            wordsArrayListStringBuilder.append(wordsLinkedList.get(i) + " ");
+        }
+        String wordsString = wordsArrayListStringBuilder.toString();
+
+        String wordsWithReplaced = wordsString.replaceAll(fromWordsString, toWordsString);
+
+        wordsString = wordsWithReplaced;
+
+        wordsLinkedList = new LinkedList<>(Arrays.asList(wordsString.split("\\s+")));
     }
 
     @Override

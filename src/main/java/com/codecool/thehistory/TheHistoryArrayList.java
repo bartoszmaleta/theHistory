@@ -1,9 +1,6 @@
 package com.codecool.thehistory;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class TheHistoryArrayList implements TheHistory {
     /**
@@ -21,11 +18,22 @@ public class TheHistoryArrayList implements TheHistory {
 
     @Override
     public void removeWord(String wordToBeRemoved) {
-        for (String word : wordsArrayList) {
-            if (wordToBeRemoved.equals(word)) {
-                wordsArrayList.remove(word);
-            }
-        }
+        // Does not work!
+//        for (int i = 0; i < wordsArrayList.size(); i++) {
+//            if (wordToBeRemoved.equals(wordsArrayList.get(i))) {
+//                wordsArrayList.remove(wordsArrayList.get(i));
+//            }
+//        }
+
+        // ConcurrentModificationException
+//        for (String word : wordsArrayList) {
+//            if (wordToBeRemoved.equals(word)) {
+//                wordsArrayList.remove(word);
+//            }
+//        }
+
+        wordsArrayList.removeIf(wordToBeRemoved::equals);
+
     }
 
     @Override
@@ -35,17 +43,40 @@ public class TheHistoryArrayList implements TheHistory {
 
     @Override
     public void clear() {
-        //TODO: check the TheHistory interface for more information
+        wordsArrayList.clear();
     }
 
     @Override
     public void replaceOneWord(String from, String to) {
-        //TODO: check the TheHistory interface for more information
+
+        Collections.replaceAll(wordsArrayList, from, to);
     }
 
     @Override
     public void replaceMoreWords(String[] fromWords, String[] toWords) {
         //TODO: check the TheHistory interface for more information
+
+        StringBuilder fromWordsStringBuilder = new StringBuilder();
+        for (int i = 0; i < fromWords.length; i++) {
+            fromWordsStringBuilder.append(fromWords[i] + " ");
+        }
+        String fromWordsString = fromWordsStringBuilder.toString();
+
+        StringBuilder toWordsStringBuilder = new StringBuilder();
+        for (int i = 0; i < toWords.length; i++) {
+            toWordsStringBuilder.append(toWords[i]+ " ");
+        }
+        String toWordsString = toWordsStringBuilder.toString();
+
+        StringBuilder wordsArrayListStringBuilder = new StringBuilder();
+        for (int i = 0; i < wordsArrayList.size(); i++) {
+            wordsArrayListStringBuilder.append(wordsArrayList.get(i) + " ");
+        }
+        String wordsString = wordsArrayListStringBuilder.toString();
+
+        wordsString = wordsString.replaceAll(fromWordsString, toWordsString);
+
+        wordsArrayList = new ArrayList<String>(Arrays.asList(wordsString.split("\\s+")));
     }
 
     @Override

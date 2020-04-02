@@ -47,7 +47,13 @@ public class TheHistoryArray implements TheHistory {
 
     @Override
     public void replaceOneWord(String from, String to) {
-        //TODO: check the TheHistory interface for more information
+        int count = 0;
+        for (String word : wordsArray) {
+            if (word.equals(from)) {
+                wordsArray[count] = to;
+            }
+            count++;
+        }
     }
 
     @Override

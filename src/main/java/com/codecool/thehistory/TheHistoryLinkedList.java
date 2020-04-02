@@ -47,8 +47,16 @@ public class TheHistoryLinkedList implements TheHistory {
 
     @Override
     public void replaceOneWord(String from, String to) {
-        //TODO: check the TheHistory interface for more information
-        Collections.replaceAll(wordsLinkedList, from, to);
+//        Faster
+        //        Collections.replaceAll(wordsLinkedList, from, to);
+
+        ListIterator<String> itr = wordsLinkedList.listIterator();
+
+        while (itr.hasNext()) {
+            if (itr.next().equals(from)) {
+                itr.set(to);
+            }
+        }
     }
 
     @Override
@@ -64,7 +72,7 @@ public class TheHistoryLinkedList implements TheHistory {
 
         StringBuilder toWordsStringBuilder = new StringBuilder();
         for (int i = 0; i < toWords.length; i++) {
-            toWordsStringBuilder.append(toWords[i]+ " ");
+            toWordsStringBuilder.append(toWords[i] + " ");
         }
         String toWordsString = toWordsStringBuilder.toString();
 

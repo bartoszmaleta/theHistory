@@ -49,7 +49,16 @@ public class TheHistoryArrayList implements TheHistory {
     @Override
     public void replaceOneWord(String from, String to) {
 
+        // Faster
         Collections.replaceAll(wordsArrayList, from, to);
+
+//        ListIterator<String> itr = wordsArrayList.listIterator();
+//
+//        while (itr.hasNext()) {
+//            if (itr.next().equals(from)) {
+//                itr.set(to);
+//            }
+//        }
     }
 
     @Override

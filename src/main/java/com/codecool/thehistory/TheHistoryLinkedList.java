@@ -62,31 +62,26 @@ public class TheHistoryLinkedList implements TheHistory {
     @Override
     public void replaceMoreWords(String[] fromWords, String[] toWords) {
         //TODO: check the TheHistory interface for more information
-
-
-        StringBuilder fromWordsStringBuilder = new StringBuilder();
-        for (int i = 0; i < fromWords.length; i++) {
-            fromWordsStringBuilder.append(fromWords[i] + " ");
-        }
-        String fromWordsString = fromWordsStringBuilder.toString();
-
-        StringBuilder toWordsStringBuilder = new StringBuilder();
-        for (int i = 0; i < toWords.length; i++) {
-            toWordsStringBuilder.append(toWords[i] + " ");
-        }
-        String toWordsString = toWordsStringBuilder.toString();
-
-        StringBuilder wordsArrayListStringBuilder = new StringBuilder();
         for (int i = 0; i < wordsLinkedList.size(); i++) {
-            wordsArrayListStringBuilder.append(wordsLinkedList.get(i) + " ");
+
+            if (i + fromWords.length > wordsLinkedList.size()) {
+                break;
+            }
+
+            List<String> sublist = wordsLinkedList.subList(i, i + fromWords.length);
+
+            if (sublist.equals(Arrays.asList(fromWords))) {
+
+                int elements = i + fromWords.length;
+
+                for (int j = i; j < elements; j++) {
+                    wordsLinkedList.remove(i);
+                }
+
+                wordsLinkedList.addAll(i, Arrays.asList(toWords));
+                i += toWords.length - 1;
+            }
         }
-        String wordsString = wordsArrayListStringBuilder.toString();
-
-        String wordsWithReplaced = wordsString.replaceAll(fromWordsString, toWordsString);
-
-        wordsString = wordsWithReplaced;
-
-        wordsLinkedList = new LinkedList<>(Arrays.asList(wordsString.split("\\s+")));
     }
 
     @Override

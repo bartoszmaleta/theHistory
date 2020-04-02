@@ -63,29 +63,51 @@ public class TheHistoryArrayList implements TheHistory {
 
     @Override
     public void replaceMoreWords(String[] fromWords, String[] toWords) {
-        //TODO: check the TheHistory interface for more information
+        // FIRST OPTION
+//        StringBuilder fromWordsStringBuilder = new StringBuilder();
+//        for (int i = 0; i < fromWords.length; i++) {
+//            fromWordsStringBuilder.append(fromWords[i] + " ");
+//        }
+//        String fromWordsString = fromWordsStringBuilder.toString();
+//
+//        StringBuilder toWordsStringBuilder = new StringBuilder();
+//        for (int i = 0; i < toWords.length; i++) {
+//            toWordsStringBuilder.append(toWords[i]+ " ");
+//        }
+//        String toWordsString = toWordsStringBuilder.toString();
+//
+//        StringBuilder wordsArrayListStringBuilder = new StringBuilder();
+//        for (int i = 0; i < wordsArrayList.size(); i++) {
+//            wordsArrayListStringBuilder.append(wordsArrayList.get(i) + " ");
+//        }
+//        String wordsString = wordsArrayListStringBuilder.toString();
+//
+//        wordsString = wordsString.replaceAll(fromWordsString, toWordsString);
+//
+//        wordsArrayList = new ArrayList<String>(Arrays.asList(wordsString.split("\\s+")));
+//
 
-        StringBuilder fromWordsStringBuilder = new StringBuilder();
-        for (int i = 0; i < fromWords.length; i++) {
-            fromWordsStringBuilder.append(fromWords[i] + " ");
-        }
-        String fromWordsString = fromWordsStringBuilder.toString();
-
-        StringBuilder toWordsStringBuilder = new StringBuilder();
-        for (int i = 0; i < toWords.length; i++) {
-            toWordsStringBuilder.append(toWords[i]+ " ");
-        }
-        String toWordsString = toWordsStringBuilder.toString();
-
-        StringBuilder wordsArrayListStringBuilder = new StringBuilder();
+        // SECOND OPTION
         for (int i = 0; i < wordsArrayList.size(); i++) {
-            wordsArrayListStringBuilder.append(wordsArrayList.get(i) + " ");
+
+            if (i + fromWords.length > wordsArrayList.size()) {
+                break;
+            }
+
+            List<String> sublist = wordsArrayList.subList(i, i + fromWords.length);
+
+            if (sublist.equals(Arrays.asList(fromWords))) {
+
+                int elements = i + fromWords.length;
+
+                for (int j = i; j < elements; j++) {
+                    wordsArrayList.remove(i);
+                }
+
+                wordsArrayList.addAll(i, Arrays.asList(toWords));
+                i += toWords.length - 1;
+            }
         }
-        String wordsString = wordsArrayListStringBuilder.toString();
-
-        wordsString = wordsString.replaceAll(fromWordsString, toWordsString);
-
-        wordsArrayList = new ArrayList<String>(Arrays.asList(wordsString.split("\\s+")));
     }
 
     @Override

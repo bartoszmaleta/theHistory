@@ -58,7 +58,31 @@ public class TheHistoryArray implements TheHistory {
 
     @Override
     public void replaceMoreWords(String[] fromWords, String[] toWords) {
-        //TODO: check the TheHistory interface for more information
+        StringBuilder wordsSB = new StringBuilder();
+
+        for (int i = 0; i < wordsArray.length; i++) {
+            wordsSB.append(wordsArray[i] + " ");
+        }
+
+        String fromWordsString = String.join(" ", fromWords);
+        String toWordsString = String.join(" ", toWords);
+
+        int i = 0;
+        while (wordsSB.indexOf(fromWordsString, i) > -1) {
+            int index = wordsSB.indexOf(fromWordsString, i);
+
+            if (index > 0 && wordsSB.charAt(index - 1) != ' '
+                    || wordsSB.charAt(index + fromWordsString.length()) != ' ') {
+                i = index + 1;
+//                i = index + toWordsString.length();
+                continue;
+            }
+
+            wordsSB.replace(index, index + fromWordsString.length(), toWordsString);
+            i = index + toWordsString.length();
+        }
+
+        wordsArray = wordsSB.toString().split(" ");
     }
 
     @Override

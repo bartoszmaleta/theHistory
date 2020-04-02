@@ -23,16 +23,15 @@ public class TheHistoryArray implements TheHistory {
 
     @Override
     public void removeWord(String wordToBeRemoved) {
-        // TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        StringBuilder str = new StringBuilder();
-        for (String word : wordsArray) {
-            if (!wordToBeRemoved.equals(word + ",")) {
-                str.append(word);
+        StringBuilder wordsSB = new StringBuilder();
+
+        for (int i = 0; i < wordsArray.length; i++) {
+            if (!wordsArray[i].equals(wordToBeRemoved)) {
+                wordsSB.append(wordsArray[i] + " ");
             }
         }
 
-        String[] result = str.toString().split(",");
-        wordsArray = result;
+        wordsArray = wordsSB.toString().split(" ");
     }
 
     @Override
